@@ -1,5 +1,4 @@
 ﻿using Aplicacao_Bancaria.Exceptions;
-using Aplicacao_Bancaria.Models;
 using Xunit;
 
 namespace Aplicacao_Bancaria.Tests.Exceptions;
