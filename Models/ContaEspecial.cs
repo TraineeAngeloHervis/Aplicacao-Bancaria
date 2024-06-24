@@ -5,41 +5,37 @@ namespace Aplicacao_Bancaria.Models;
 public class ContaEspecial : ContaBancaria
 {
     private double Limite { get; set; }
-    
-    public ContaEspecial (int numeroConta, double limite)
+
+    public ContaEspecial(int numeroConta, double limite)
     {
         NumeroConta = numeroConta;
         Limite = limite;
     }
-    
+
     public override void Sacar(double valor)
     {
-        if (Saldo + Limite >= valor)
-        {
-            Saldo -= valor;
-            Console.WriteLine($"Saque de R$ {valor} realizado com sucesso!");
-        }
         if (Saldo + Limite < valor)
         {
             throw new LimiteInsuficienteException();
         }
+
+        Saldo -= valor;
+        Console.WriteLine($"Saque de R$ {valor} realizado com sucesso!");
     }
-    
+
     public override void Depositar(double valor)
     {
-        if (valor > 0)
-        {
-            Saldo += valor;
-            Console.WriteLine($"Depósito de R$ {valor} realizado com sucesso!");
-        } 
-        else
+        if (valor < 0)
         {
             throw new DepositoNegativoException();
         }
+
+        Saldo += valor;
+        Console.WriteLine($"Depósito de R$ {valor} realizado com sucesso!");
     }
-    
-    public void MostrarDados()
+
+    public string MostrarDados()
     {
-        Console.WriteLine($"Conta Especial\nNúmero da Conta: {NumeroConta}\nSaldo: R$ {Saldo}\nLimite: R$ {Limite}");
+        return $"Conta Especial\nNúmero da Conta: {NumeroConta}\nSaldo: R$ {Saldo}\nLimite: R$ {Limite}";
     }
 }

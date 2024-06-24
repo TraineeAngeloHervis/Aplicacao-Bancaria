@@ -1,10 +1,12 @@
-﻿namespace Aplicacao_Bancaria.Models;
+﻿using Aplicacao_Bancaria.Exceptions;
 
-public class ContaCorrente : ContaBancaria, Imprimivel
+namespace Aplicacao_Bancaria.Models;
+
+public class ContaCorrente : ContaBancaria
 {
     private double TaxaDeOperacao { get; set; }
-    
-    public ContaCorrente (int numeroConta, double taxaDeOperacao)
+
+    public ContaCorrente(int numeroConta, double taxaDeOperacao)
     {
         NumeroConta = numeroConta;
         TaxaDeOperacao = taxaDeOperacao;
@@ -12,25 +14,29 @@ public class ContaCorrente : ContaBancaria, Imprimivel
 
     public override void Sacar(double valor)
     {
-        if (Saldo >= valor + TaxaDeOperacao)
+        if (Saldo < valor + TaxaDeOperacao)
         {
-            Saldo -= valor + TaxaDeOperacao;
-            Console.WriteLine($"Saque de R$ {valor} realizado com sucesso!");
+            throw new SaldoInsuficienteException();
         }
-        else
-        {
-            Console.WriteLine("Saldo insuficiente!");
-        }
+
+        Saldo -= valor + TaxaDeOperacao;
+        Console.WriteLine($"Saque de R$ {valor} realizado com sucesso!");
     }
-    
+
     public override void Depositar(double valor)
     {
+        if (valor < 0)
+        {
+            throw new DepositoNegativoException();
+        }
+
         Saldo += valor - TaxaDeOperacao;
         Console.WriteLine($"Depósito de R$ {valor} realizado com sucesso!");
     }
-    
-    public void MostrarDados()
+
+    public string MostrarDados()
     {
-        Console.WriteLine($"Conta Corrente\nNúmero da Conta: {NumeroConta}\nSaldo: R$ {Saldo}\nTaxa de Operação: R$ {TaxaDeOperacao}");
+        return
+            $"Conta Corrente\nNúmero da Conta: {NumeroConta}\nSaldo: R$ {Saldo}\nTaxa de Operação: R$ {TaxaDeOperacao}";
     }
 }

@@ -12,7 +12,7 @@ public class LimiteInsuficienteExceptionTests
         // Arrange & Act
         var exception = new LimiteInsuficienteException();
         const string resultadoEsperado = "Limite insuficiente!";
-        
+
         // Assert
         Assert.Equal(resultadoEsperado, exception.Message);
     }

@@ -2,17 +2,17 @@
 
 public class LimiteInsuficienteException : Exception
 {
-    public LimiteInsuficienteException() 
+    public LimiteInsuficienteException()
         : base("Limite insuficiente!")
     {
     }
-    
-    public LimiteInsuficienteException(string message) 
+
+    public LimiteInsuficienteException(string message)
         : base(message)
     {
     }
-    
-    public LimiteInsuficienteException(string message, Exception innerException) 
+
+    public LimiteInsuficienteException(string message, Exception innerException)
         : base(message, innerException)
     {
     }

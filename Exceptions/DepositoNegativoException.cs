@@ -2,17 +2,17 @@
 
 public class DepositoNegativoException : Exception
 {
-    public DepositoNegativoException() 
+    public DepositoNegativoException()
         : base("Não é possível depositar um valor negativo!")
     {
     }
-    
-    public DepositoNegativoException(string message) 
+
+    public DepositoNegativoException(string message)
         : base(message)
     {
     }
-    
-    public DepositoNegativoException(string message, Exception innerException) 
+
+    public DepositoNegativoException(string message, Exception innerException)
         : base(message, innerException)
     {
     }

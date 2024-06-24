@@ -11,7 +11,7 @@ public class DepositoNegativoExceptionTests
         // Arrange & Act
         var exception = new DepositoNegativoException();
         const string resultadoEsperado = "Não é possível depositar um valor negativo!";
-        
+
         // Assert
         Assert.Equal(resultadoEsperado, exception.Message);
     }
