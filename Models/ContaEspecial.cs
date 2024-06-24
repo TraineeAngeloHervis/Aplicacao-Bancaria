@@ -1,4 +1,6 @@
-﻿namespace Aplicacao_Bancaria.Models;
+﻿using Aplicacao_Bancaria.Exceptions;
+
+namespace Aplicacao_Bancaria.Models;
 
 public class ContaEspecial : ContaBancaria
 {
@@ -19,14 +21,21 @@ public class ContaEspecial : ContaBancaria
         }
         if (Saldo + Limite < valor)
         {
-            Console.WriteLine("Saque não realizado! Saldo insuficiente!");
+            throw new LimiteInsuficienteException();
         }
     }
     
     public override void Depositar(double valor)
     {
-        Saldo += valor;
-        Console.WriteLine($"Depósito de R$ {valor} realizado com sucesso!");
+        if (valor > 0)
+        {
+            Saldo += valor;
+            Console.WriteLine($"Depósito de R$ {valor} realizado com sucesso!");
+        } 
+        else
+        {
+            throw new DepositoNegativoException();
+        }
     }
     
     public void MostrarDados()
